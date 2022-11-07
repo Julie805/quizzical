@@ -8,6 +8,8 @@ body {
   padding: 20px;
   font-family: 'Karla', sans-serif;
   font-size: 16px;
+  color: #293264;
+  font-weight: 700;
 }
 
 main {
@@ -26,10 +28,23 @@ main {
 .start-button {
   padding: 16px 40px;
   background-color: #4D5B9E;
-  color: white;
-  letter-spacing: .15em;
-  font-weight: 500;
   border: none;
   border-radius: 15px;
-
+  margin-top: 20px;
+  color: white;
+  font-size: 1.125rem;
+  letter-spacing: .15em;
+  font-weight: 500;
 }
+
+h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+p {
+  font-weight: 400;
+  font-size: 1.125rem; 
+}
+
+
