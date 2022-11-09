@@ -17,12 +17,17 @@ main {
   height: 400px;
   width: 550px;
   height: 550px;
+  margin: auto;
+}
+
+.intro {
   display: flex;
   flex-direction: column;
   justify-content:space-around;
   align-items: center;
   text-align: center;
   margin: auto;
+  padding-top: 150px;
 }
 
 .start-button {
@@ -47,4 +52,30 @@ p {
   font-size: 1.125rem; 
 }
 
+.quiz {
+  padding: 40px 75px;
+}
+
+.question {
+  font-size:  1.125rem;  
+}
+
+hr {
+  margin-top: 20px;
+  border: 0.8px solid #DBDEF0;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+
+}
+.answer-button {
+  font-family: 'Karla';
+  border: .8px #4D5B9E solid;
+  color: #4D5B9E;
+  background: white;
+  border-radius: 8px;
+  padding: 3px 15px;
+}
 
