@@ -8,7 +8,7 @@ export default function Question () {
 
   return (
     <div className="question"> 
-      <h3>What makes a great quiz question?</h3>
+      <h3>ai yai yai</h3>
     </div>
   )
 }
