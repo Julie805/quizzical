@@ -1,10 +1,21 @@
+import React from "react"
 import Intro from "./components/Intro"
-import './style.css';
+import  Quiz from "./components/Quiz"
+import './style.css'
 
 function App() {
+
+    /* 2 states: start(to start quiz), quizData (to set up Question objects)  */
+    const [start, setStart] = React.useState(false)
+
+    function startQuiz() {
+      setStart(true)
+    }
+  
+  
   return (
     <main>
-      <Intro />
+      { start ? <Quiz /> : <Intro start={startQuiz} /> }
     </main>
   )
 }
