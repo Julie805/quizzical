@@ -30,7 +30,9 @@ export default function Quiz () {
  const cardElements = data.map(item => {
   return <Card 
     question={item.question}
-    answer={item.incorrect_answers} />
+    incorrectAnswers={item.incorrect_answers} 
+    correctAnswer={item.correct_answer}
+    />
   }) 
   return(
     <div>

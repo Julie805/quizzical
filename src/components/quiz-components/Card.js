@@ -2,11 +2,24 @@ import React from 'react'
 
 export default function Card (props) {
 
+
+ function renderAnswers() {
+  const randomNumber = Math.floor(Math.random() * 3)
+  const allAnswersArray = props.incorrectAnswers.splice(randomNumber, 0, props.correctAnswer)
+
+  allAnswersArray.map((answer) => {
+  return  <button className="answer-button">{answer}</button>
+})
+}
+
+
+
+
   return (
     <div className="quiz">
        <h3 className="question">{props.question} </h3>
       <div>
-        <button className="answer-button">{props.answer}</button>
+        {renderAnswers}
       </div>
     </div> 
   )
