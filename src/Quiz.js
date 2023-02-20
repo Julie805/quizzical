@@ -1,6 +1,6 @@
 import React from "react"
-import data from "../data"
-import Card from "./quiz-components/Card"
+import data from "./data"
+import Card from "./components/Card"
 /* import uuid from 'react-uuid' for random number access */
 
 
@@ -28,12 +28,18 @@ export default function Quiz () {
 
 /* Maps over the data in state and passes question to Card as a prop */
  const cardElements = data.map(item => {
-  return <Card 
-    question={item.question}
-    incorrectAnswers={item.incorrect_answers} 
-    correctAnswer={item.correct_answer}
+  return (
+      <Card 
+      question={item.question}
+      incorrectAnswers={item.incorrect_answers} 
+      correctAnswer={item.correct_answer}
+      key={item.id}
     />
+  )
   }) 
+
+ 
+  
   return(
     <div>
     {cardElements}

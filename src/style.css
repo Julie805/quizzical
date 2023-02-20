@@ -70,6 +70,10 @@ hr {
   gap: 15px;
 
 }
+ul {
+  list-style: none;
+}
+
 .answer-button {
   font-family: 'Karla';
   border: .8px #4D5B9E solid;

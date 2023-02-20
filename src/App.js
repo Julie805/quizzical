@@ -1,6 +1,6 @@
 import React from "react"
-import Intro from "./components/Intro"
-import  Quiz from "./components/Quiz"
+import Intro from "./Intro"
+import  Quiz from "./Quiz"
 import './style.css'
 
 function App() {
