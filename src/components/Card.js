@@ -1,40 +1,47 @@
 import React from 'react'
 
 export default function Card (props) {
-
-  const [answers, setAnswers] = React.useState({
-    answer: [],
-    isCorrect: false
-  })
-
- 
-
   /*attempt number three */
   
-  const falseAnswers = [props.incorrectAnswers]
-  const trueAnswers = [props.trueAnswers]
-  const renderAnswers = function() {
-    falseAnswers.forEach(function(falseAnswer){
-      return  (
-        <li className="answer-button">{falseAnswer}</li>
-      )
-    })
-    
+  const incorrectAnswersObj = props.incorrectAnswers.map(answer => ({
+    answer: answer,
+    isCorrect: false,
+   
+  }))
 
+  const correctAnswerObj = {
+    answer: props.correctAnswer,
+    isCorrect: true,
   }
- 
+
+  const allAnswers = [...incorrectAnswersObj, correctAnswerObj]
+  const allAnswerValues = allAnswers.map(answer => answer.answer)
+
+  // my concern is that this doesn't hold onto its correct attribute.
+  const renderAnswers = function() {
+   return allAnswerValues.map(answer => (
+      <li className="answer-button">{answer}</li>
+    ))
+  }
+
+  // console.log(props.trueAnswers)
   return (
     <div className="quiz">
        <h3 className="question">{props.question} </h3>
       <div>
-        <ul>
-          {renderAnswers}
+        <ul className="answer-container">
+          {renderAnswers()}
         </ul>
       </div>
     </div> 
   ) 
   
 }
+
+  // const [answers, setAnswers] = React.useState({
+  //   answer: [],
+  //   isCorrect: false
+  // })
 
  
 

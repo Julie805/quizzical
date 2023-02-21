@@ -1,48 +1,43 @@
 import React from "react"
-import data from "./data"
+// import data from "./data"
 import Card from "./components/Card"
-/* import uuid from 'react-uuid' for random number access */
+import uuid from "react-uuid"
 
 
 export default function Quiz () {
 
- /* Holds the quiz object array  
- const [quizData, setQuizData] = React.useState(data.results)
- console.log(quizData)*/
+//Holds the quiz object array  
+ const [quizData, setQuizData] = React.useState('')
+ 
 
  
-/* Gets the API data upon opening app and pushes it to quizData state. When ready to use, uncomment  the import uuid at top 
- React.useEffect(() => {
-   fetch('https://opentdb.com/api.php?amount=5')
-   .then(res =>res.json())
-   .then(data => setQuizData(data.results.map(item => {
-     return  {
-       id: uuid(),
-       question: item.question,
-       correctAnswer: item.correct_answer,
-       incorrectAnswers: item.incorrect_answers
-     }
-   })))
- }, [])
- */ 
-
+//Gets the API data upon opening app and pushes it to quizData state. 
+React.useEffect(() => {
+  fetch("https://opentdb.com/api.php?amount=5")
+    .then((res) => res.json())
+    .then((data) =>
+      setQuizData(
+        data.results.map((item) => ({
+          ...item,
+          key: uuid(),
+        }))
+      )
+    );
+}, []);
+const test = quizData.map((item) => (
+  <Card
+    question={item.question}
+    incorrectAnswers={item.incorrect_answers}
+    correctAnswer={item.correct_answer}
+    key={item.key}
+  />
+))
 /* Maps over the data in state and passes question to Card as a prop */
- const cardElements = data.map(item => {
-  return (
-      <Card 
-      question={item.question}
-      incorrectAnswers={item.incorrect_answers} 
-      correctAnswer={item.correct_answer}
-      key={item.id}
-    />
-  )
-  }) 
-
- 
-  
-  return(
-    <div>
-    {cardElements}
-    </div>
-  )
+return (
+  <div>
+    {test}
+  </div>
+);
 }
+  
+

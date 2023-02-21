@@ -53,7 +53,7 @@ p {
 }
 
 .quiz {
-  padding: 40px 75px;
+  padding: 5px 75px;
 }
 
 .question {
@@ -74,6 +74,12 @@ ul {
   list-style: none;
 }
 
+.answer-container {
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  padding: 0;
+}
 .answer-button {
   font-family: 'Karla';
   border: .8px #4D5B9E solid;
@@ -81,5 +87,7 @@ ul {
   background: white;
   border-radius: 8px;
   padding: 3px 15px;
+  width: 100px;
+  text-align: center;
 }
 
