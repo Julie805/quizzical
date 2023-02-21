@@ -18,6 +18,7 @@ main {
   width: 550px;
   height: 550px;
   margin: auto;
+  overflow: auto;
 }
 
 .intro {
@@ -52,12 +53,15 @@ p {
   font-size: 1.125rem; 
 }
 
-.quiz {
-  padding: 5px 75px;
+.quiz-container{
+  padding: 5px 75px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .question {
-  font-size:  1.125rem;  
+  font-size:  1rem;  
 }
 
 hr {
@@ -68,26 +72,43 @@ hr {
 .buttons {
   display: flex;
   gap: 15px;
-
 }
+
 ul {
   list-style: none;
 }
 
 .answer-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   gap: 5px;
   padding: 0;
+  width: 400px;
 }
 .answer-button {
   font-family: 'Karla';
+  font-size: .7rem;
   border: .8px #4D5B9E solid;
   color: #4D5B9E;
   background: white;
   border-radius: 8px;
   padding: 3px 15px;
-  width: 100px;
-  text-align: center;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.quiz-button {
+  padding: 12px 15px;
+  background-color: #4D5B9E;
+  border: none;
+  border-radius: 15px;
+  margin-top: 20px;
+  color: white;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  font-weight: 500;
+  align-self: center;
 }
 

@@ -1,16 +1,15 @@
 import React from 'react'
+import he from 'he' //"html entities" for decoding text
 
 export default function Card (props) {
-  /*attempt number three */
-  
   const incorrectAnswersObj = props.incorrectAnswers.map(answer => ({
-    answer: answer,
+    answer: he.decode(answer),
     isCorrect: false,
-   
   }))
+  console.log(incorrectAnswersObj)
 
   const correctAnswerObj = {
-    answer: props.correctAnswer,
+    answer: he.decode(props.correctAnswer),
     isCorrect: true,
   }
 
@@ -26,8 +25,8 @@ export default function Card (props) {
 
   // console.log(props.trueAnswers)
   return (
-    <div className="quiz">
-       <h3 className="question">{props.question} </h3>
+    <div>
+       <h3 className="question">{he.decode(props.question)} </h3>
       <div>
         <ul className="answer-container">
           {renderAnswers()}
