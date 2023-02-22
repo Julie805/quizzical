@@ -85,6 +85,7 @@ ul {
   padding: 0;
   width: 400px;
 }
+
 .answer-button {
   font-family: 'Karla';
   font-size: .7rem;
@@ -97,6 +98,11 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center; 
+}
+
+.clicked {
+  background: #bdc2da;
+  border: 1.5px #4D5B9E solid;
 }
 
 .quiz-button {

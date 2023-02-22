@@ -1,29 +1,62 @@
 import React from 'react'
 import he from 'he' //"html entities" for decoding text
+import uuid from "react-uuid"
 
-export default function Card (props) {
-  const incorrectAnswersObj = props.incorrectAnswers.map(answer => ({
-    answer: he.decode(answer),
-    isCorrect: false,
-  }))
-  console.log(incorrectAnswersObj)
 
-  const correctAnswerObj = {
-    answer: he.decode(props.correctAnswer),
-    isCorrect: true,
+export default function Card(props) {
+  const [selectedAnswers, setSelectedAnswers] = React.useState([]);
+  const allAnswers = [
+    ...props.incorrectAnswers.map(answer => ({
+      answer: he.decode(answer),
+      isCorrect: false,
+      id: uuid(),
+    })),
+    {
+      answer: he.decode(props.correctAnswer),
+      isCorrect: true,
+      id: uuid(),
+    },
+  ];
+
+  const handleAnswerClick = function(index) {
+    setSelectedAnswers([...selectedAnswers, index])
   }
 
-  const allAnswers = [...incorrectAnswersObj, correctAnswerObj]
-  const allAnswerValues = allAnswers.map(answer => answer.answer)
+  // const incorrectAnswersObj = props.incorrectAnswers.map(answer => ({
+  //   answer: he.decode(answer),
+  //   isCorrect: false,
+  //   id: uuid(),
+  // }))
+ 
 
-  // my concern is that this doesn't hold onto its correct attribute.
-  const renderAnswers = function() {
-   return allAnswerValues.map(answer => (
-      <li className="answer-button">{answer}</li>
-    ))
-  }
+  // const correctAnswerObj = {
+  //   answer: he.decode(props.correctAnswer),
+  //   isCorrect: true,
+  //   id: uuid(),
+  // }
 
-  // console.log(props.trueAnswers)
+  // const allAnswers = [...incorrectAnswersObj, correctAnswerObj]
+  // const allAnswerValues = allAnswers.map(answer => answer.answer)
+
+//creates the array of answers to render
+  
+
+const renderAnswers = function() {
+  return allAnswers.map((answer, index) => (
+    <li
+      key={answer.id}
+      className={`answer-button ${
+        selectedAnswers.includes(index) ? 'clicked' : ''
+      }`}
+      onClick={() => handleAnswerClick(index)}
+    >
+      {answer.answer}
+    </li>
+  ));
+};
+
+
+  
   return (
     <div>
        <h3 className="question">{he.decode(props.question)} </h3>
@@ -34,7 +67,6 @@ export default function Card (props) {
       </div>
     </div> 
   ) 
-  
 }
 
   // const [answers, setAnswers] = React.useState({
