@@ -104,8 +104,14 @@ ul {
   background: #bdc2da;
   border: 1.5px #4D5B9E solid;
 }
-.test {
-  border: 1.5px red solid;
+.correct {
+  background: #94D7A2;
+  border: .8px #94D7A2 solid;
+}
+
+.incorrect {
+  background: #F8BCBC;
+  border: .8px #F8BCBC solid;
 }
 
 .quiz-button {
