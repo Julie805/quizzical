@@ -104,6 +104,9 @@ ul {
   background: #bdc2da;
   border: 1.5px #4D5B9E solid;
 }
+.test {
+  border: 1.5px red solid;
+}
 
 .quiz-button {
   padding: 12px 15px;
