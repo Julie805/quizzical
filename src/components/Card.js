@@ -2,9 +2,9 @@ import React from 'react'
 import he from 'he' //"html entities" for decoding text
 import uuid from "react-uuid"
 
-
+//remember that each card represents just a single question, and not the whole quiz!
 export default function Card(props) {
-  const [selectedAnswers, setSelectedAnswers] = React.useState([]);
+  const [selectedAnswer, setSelectedAnswer] = React.useState([]);
   const allAnswers = [
     ...props.incorrectAnswers.map(answer => ({
       answer: he.decode(answer),
@@ -18,24 +18,19 @@ export default function Card(props) {
     },
   ];
 
-  const handleAnswerClick = function(index) {
-    const answer = allAnswers[index] //clicked answer obj
-    const updatedSelectedAnswers = [ 
-      ...selectedAnswers,
-      {index, isCorrect: answer.isCorrect}  //relevant info
-    ]
-    setSelectedAnswers([updatedSelectedAnswers])
-  }
-
-  console.log(selectedAnswers)
-
+  const handleAnswerClick = function (index) {
+    const answer = allAnswers[index]; //whole object
+    setSelectedAnswer(answer)
+  };
 
   const renderAnswers = function() {
+    console.log(selectedAnswer)
+    console.log(allAnswers)
     return allAnswers.map((answer, index) => (
       <li
         key={answer.id}
         className={`answer-button ${
-          selectedAnswers.some((selected) => selected.index === index)
+          selectedAnswer.answer === answer.answer
             ? "clicked"
             : ""
         }`}
@@ -44,9 +39,8 @@ export default function Card(props) {
         {answer.answer}
       </li>
     ));
-  };
 
-
+  }
   
   return (
     <div>
