@@ -19,41 +19,32 @@ export default function Card(props) {
   ];
 
   const handleAnswerClick = function(index) {
-    setSelectedAnswers([...selectedAnswers, index])
+    const answer = allAnswers[index] //clicked answer obj
+    const updatedSelectedAnswers = [ 
+      ...selectedAnswers,
+      {index, isCorrect: answer.isCorrect}  //relevant info
+    ]
+    setSelectedAnswers([updatedSelectedAnswers])
   }
 
-  // const incorrectAnswersObj = props.incorrectAnswers.map(answer => ({
-  //   answer: he.decode(answer),
-  //   isCorrect: false,
-  //   id: uuid(),
-  // }))
- 
+  console.log(selectedAnswers)
 
-  // const correctAnswerObj = {
-  //   answer: he.decode(props.correctAnswer),
-  //   isCorrect: true,
-  //   id: uuid(),
-  // }
 
-  // const allAnswers = [...incorrectAnswersObj, correctAnswerObj]
-  // const allAnswerValues = allAnswers.map(answer => answer.answer)
-
-//creates the array of answers to render
-  
-
-const renderAnswers = function() {
-  return allAnswers.map((answer, index) => (
-    <li
-      key={answer.id}
-      className={`answer-button ${
-        selectedAnswers.includes(index) ? 'clicked' : ''
-      }`}
-      onClick={() => handleAnswerClick(index)}
-    >
-      {answer.answer}
-    </li>
-  ));
-};
+  const renderAnswers = function() {
+    return allAnswers.map((answer, index) => (
+      <li
+        key={answer.id}
+        className={`answer-button ${
+          selectedAnswers.some((selected) => selected.index === index)
+            ? "clicked"
+            : ""
+        }`}
+        onClick={() => handleAnswerClick(index)}
+      >
+        {answer.answer}
+      </li>
+    ));
+  };
 
 
   
