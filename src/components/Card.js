@@ -18,54 +18,23 @@ export default function Card(props) {
       id: uuid(),
     },
   ];
-
-  // const renderAnswers = function (index) {
-  //   if (props.showAnswers === true) {
-  //     allAnswers.map((answer) => {
-  //       if(answer.isCorrect === true){
-  //         return (
-  //           <div>
-
-  //           </div>
-  //         )
-
-  //       }
-  //     }
-
-
-  //   }
-  // }
-
-  // function gradeQuiz(answer, state) {
-  //   if (state===true && answer.isCorrect===true) {
-  //     return "correct";
-  //   } else if (state===true && answer.isCorrect===false && selectedAnswer.isCorrect !== true) {
-  //     return "incorrect"
-  //   } else {
-  //     return "";
-  //   }
-  // }
-
-  function gradeQuiz(answer, state) {
-    if (state===true) {
-      if (answer.isCorrect===true) {
-        return "correct";
-      } else if (selectedAnswer.isCorrect === false) {
-        return "incorrect"
-      }
-    } else {
-      return "";
-    }
-  }
-      
-
-
-   
-  
+    
   const handleAnswerClick = function (index) {
     const answer = allAnswers[index]; //returns whole object
     setSelectedAnswer(answer)
   };
+//else if checks if there is a selected Answer, and if this answer equals the answer that is coming in from the list argument, and if that answer is not correct.
+  function gradeQuiz(answer, state) {
+    if (state===true) {
+      if (answer.isCorrect===true) {
+        return "correct";
+      } else if (selectedAnswer && selectedAnswer.answer === answer.answer && answer.isCorrect === false) {
+        return "incorrect"
+      } 
+    } else {
+      return "";
+    }
+  }
 
   const renderAnswers = function() {
     return allAnswers.map((answer, index) => (
