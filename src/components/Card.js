@@ -19,6 +19,49 @@ export default function Card(props) {
     },
   ];
 
+  // const renderAnswers = function (index) {
+  //   if (props.showAnswers === true) {
+  //     allAnswers.map((answer) => {
+  //       if(answer.isCorrect === true){
+  //         return (
+  //           <div>
+
+  //           </div>
+  //         )
+
+  //       }
+  //     }
+
+
+  //   }
+  // }
+
+  // function gradeQuiz(answer, state) {
+  //   if (state===true && answer.isCorrect===true) {
+  //     return "correct";
+  //   } else if (state===true && answer.isCorrect===false && selectedAnswer.isCorrect !== true) {
+  //     return "incorrect"
+  //   } else {
+  //     return "";
+  //   }
+  // }
+
+  function gradeQuiz(answer, state) {
+    if (state===true) {
+      if (answer.isCorrect===true) {
+        return "correct";
+      } else if (selectedAnswer.isCorrect === false) {
+        return "incorrect"
+      }
+    } else {
+      return "";
+    }
+  }
+      
+
+
+   
+  
   const handleAnswerClick = function (index) {
     const answer = allAnswers[index]; //returns whole object
     setSelectedAnswer(answer)
@@ -33,11 +76,9 @@ export default function Card(props) {
           ${selectedAnswer.answer === answer.answer
             ? "clicked"
             : ""
-          }`
-          // ${props.showAnswers 
-          //   ? "test"
-          //   :""
-          // }`
+          }
+          ${gradeQuiz(answer, props.showAnswers)}`
+    
         }
         onClick={() => handleAnswerClick(index)}
       >
