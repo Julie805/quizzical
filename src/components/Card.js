@@ -1,10 +1,11 @@
 import React from 'react'
+import {useEffect} from 'react'
 import he from 'he' //"html entities" for decoding text
 import uuid from "react-uuid"
 
 //each Card represents just a single question and its answers, not the whole quiz
 export default function Card(props) {
-  console.log(props.showAnswers)
+  // console.log(props.showAnswers)
   const [selectedAnswer, setSelectedAnswer] = React.useState([]);
   const allAnswers = [
     ...props.incorrectAnswers.map(answer => ({
@@ -17,7 +18,20 @@ export default function Card(props) {
       isCorrect: true,
       id: uuid(),
     },
-  ];
+  ]; 
+
+
+
+  // const randomOrder = React.useMemo(() => {
+  //   return  (
+  //     allAnswers.sort(() => Math.random() - 0.5)
+  //   )  
+  // }, [allAnswers]) 
+
+  // React.useEffect(() => {
+  //  console.log("order changed")
+  // }, [randomOrder])
+ 
     
   const handleAnswerClick = function (index) {
     const answer = allAnswers[index]; //returns whole object
@@ -30,7 +44,9 @@ export default function Card(props) {
         return "correct";
       } else if (selectedAnswer && selectedAnswer.answer === answer.answer && answer.isCorrect === false) {
         return "incorrect"
-      } 
+      } else {
+        return "unselected"
+      }
     } else {
       return "";
     }
@@ -47,13 +63,12 @@ export default function Card(props) {
             : ""
           }
           ${gradeQuiz(answer, props.showAnswers)}`
-    
         }
         onClick={() => handleAnswerClick(index)}
       >
         {answer.answer}
       </li>
-    ));
+    ))
   }
   
   return (

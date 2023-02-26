@@ -112,6 +112,12 @@ ul {
 .incorrect {
   background: #F8BCBC;
   border: .8px #F8BCBC solid;
+  color:  #a6a7aa;
+}
+
+.unselected {
+  color: #a6a7aa;
+  border: .8px #a6a7aa solid;
 }
 
 .quiz-button {
