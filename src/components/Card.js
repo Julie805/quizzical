@@ -7,7 +7,7 @@ import uuid from "react-uuid"
 export default function Card(props) {
   // console.log(props.showAnswers)
   const [selectedAnswer, setSelectedAnswer] = React.useState([]);
-  const allAnswers = [
+  const [allAnswers, setAllAnswers]  = React.useState([
     ...props.incorrectAnswers.map(answer => ({
       answer: he.decode(answer),
       isCorrect: false,
@@ -18,8 +18,12 @@ export default function Card(props) {
       isCorrect: true,
       id: uuid(),
     },
-  ]; 
+  ].sort(() => Math.random() - 0.5))
 
+
+  // function scrambleAnswers () {
+  //   setAllAnswers(allAnswers.sort(() => Math.random() - 0.5))
+  // }
 
 
   // const randomOrder = React.useMemo(() => {
