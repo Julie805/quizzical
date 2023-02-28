@@ -22,6 +22,12 @@ export default function Quiz () {
         )
       );
   }, []);
+
+  function handleGotCorrect(gotCorrect) {
+    console.log("gotCorrect value is:", gotCorrect);
+    // do something with the gotCorrect value
+  }
+
   const createCards = quizData.map((item) => (
     <div>
       <Card
@@ -30,6 +36,7 @@ export default function Quiz () {
         incorrectAnswers={item.incorrect_answers}
         correctAnswer={item.correct_answer}
         showAnswers={showAnswers}
+        gotCorrect={handleGotCorrect}
       />
       <hr></hr>
     </div>
@@ -39,12 +46,21 @@ export default function Quiz () {
     setShowAnswers(true)
   }
 
+  
+
   /* Maps over the data in state and passes question to Card as a prop */
   return (
     <div className="quiz-container">
       <h4>QUIZ TIME! 5 questions (scroll for more):</h4>
       {createCards}
-      <button className="quiz-button" onClick={()=>renderAnswers()}>Check answers</button>
+      <div className="button-container">
+        <h4>{showAnswers ? "You scored 2 out of 5" : ""}</h4>
+        <button 
+          className="quiz-button" 
+          onClick={()=>renderAnswers()}>
+            {showAnswers===false ? "Check answers" : "Play Again"}
+        </button>
+      </div>  
     </div>
   );
 }

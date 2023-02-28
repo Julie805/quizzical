@@ -1,5 +1,4 @@
-import React from 'react'
-import {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import he from 'he' //"html entities" for decoding text
 import uuid from "react-uuid"
 
@@ -7,7 +6,7 @@ import uuid from "react-uuid"
 export default function Card(props) {
   // console.log(props.showAnswers)
   const [selectedAnswer, setSelectedAnswer] = React.useState([]);
-  const [allAnswers, setAllAnswers]  = React.useState([
+  const [allAnswers, setAllAnswers] = React.useState([
     ...props.incorrectAnswers.map(answer => ({
       answer: he.decode(answer),
       isCorrect: false,
@@ -17,30 +16,14 @@ export default function Card(props) {
       answer: he.decode(props.correctAnswer),
       isCorrect: true,
       id: uuid(),
+      answeredCorrectly: false
     },
-  ].sort(() => Math.random() - 0.5))
+  ].sort(() => Math.random() - 0.5)) // this allows the sort to run just once. But then setAllAnswers is never used. Okay?
 
-
-  // function scrambleAnswers () {
-  //   setAllAnswers(allAnswers.sort(() => Math.random() - 0.5))
-  // }
-
-
-  // const randomOrder = React.useMemo(() => {
-  //   return  (
-  //     allAnswers.sort(() => Math.random() - 0.5)
-  //   )  
-  // }, [allAnswers]) 
-
-  // React.useEffect(() => {
-  //  console.log("order changed")
-  // }, [randomOrder])
+  React.useEffect(() => {
+    markCorrect(selectedAnswer);
+  }, [selectedAnswer]);
  
-    
-  const handleAnswerClick = function (index) {
-    const answer = allAnswers[index]; //returns whole object
-    setSelectedAnswer(answer)
-  };
 //else if checks if there is a selected Answer, and if this answer equals the answer that is coming in from the list argument, and if that answer is not correct.
   function gradeQuiz(answer, state) {
     if (state===true) {
@@ -55,6 +38,21 @@ export default function Card(props) {
       return "";
     }
   }
+//this is starting to log out now. where you left off. Check console log.
+  function markCorrect (answer) {
+    console.log(selectedAnswer.answer) // this is undefined?
+    // console.log(answer.answer)
+    // console.log(answer.isCorrect)
+    if (selectedAnswer.answer === answer.answer && answer.isCorrect === true) {
+      props.gotCorrect(true); // call the callback function in Quiz with the gotCorrect value
+      
+    }
+  }
+
+  const handleAnswerClick = function (index) {
+    const answer = allAnswers[index]; //returns whole object
+    setSelectedAnswer(answer)
+  };
 
   const renderAnswers = function() {
     return allAnswers.map((answer, index) => (
@@ -68,7 +66,7 @@ export default function Card(props) {
           }
           ${gradeQuiz(answer, props.showAnswers)}`
         }
-        onClick={() => handleAnswerClick(index)}
+        onClick={() => handleAnswerClick(index) }
       >
         {answer.answer}
       </li>
@@ -87,28 +85,4 @@ export default function Card(props) {
   ) 
 }
 
-  /*attempt number two
-  
-  function renderAnswers () {
-    const randomNumber = Math.floor(Math.random() * 4)
-    const AnswersArray = props.incorrectAnswers
-    const allAnswersArray = AnswersArray.splice(randomNumber,0, props.correctAnswer)
-  }*/
-    
-
- /* attempt number one
  
- function renderAnswers() {
-  const randomNumber = Math.floor(Math.random() * 3)
-  const allAnswersArray = []
-  allAnswersArray.push(props.incorrectAnswers.splice(randomNumber, 0, props.correctAnswer))
-  return (
-      allAnswersArray.map((answer) => {
-      return  (
-        <li className="answer-button">{answer}</li>
-      )
-  )
-  
-})
-} */
-
