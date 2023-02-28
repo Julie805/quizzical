@@ -9,6 +9,7 @@ export default function Quiz () {
 //Holds the quiz object array  
  const [quizData, setQuizData] = React.useState([]) 
  const [showAnswers, setShowAnswers] = React.useState(false)
+ const [score, setScore] = React.useState(0)
 //Gets the API data upon opening app and pushes it to quizData state. 
   React.useEffect(() => {
     fetch("https://opentdb.com/api.php?amount=5")
@@ -23,9 +24,12 @@ export default function Quiz () {
       );
   }, []);
 
+  //sets the score
   function handleGotCorrect(gotCorrect) {
-    console.log("gotCorrect value is:", gotCorrect);
-    // do something with the gotCorrect value
+    //console.log("gotCorrect value is:", gotCorrect);
+    if(gotCorrect===true) {
+      setScore(score + 1)
+    }
   }
 
   const createCards = quizData.map((item) => (
@@ -54,7 +58,7 @@ export default function Quiz () {
       <h4>QUIZ TIME! 5 questions (scroll for more):</h4>
       {createCards}
       <div className="button-container">
-        <h4>{showAnswers ? "You scored 2 out of 5" : ""}</h4>
+        <h4>{showAnswers ? `You scored ${score} out of ${quizData.length}` : ""}</h4>
         <button 
           className="quiz-button" 
           onClick={()=>renderAnswers()}>
