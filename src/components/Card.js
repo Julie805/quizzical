@@ -40,7 +40,6 @@ export default function Card(props) {
   }
 //this is starting to log out now. where you left off. Check console log.
   function markCorrect (answer) {
-    console.log(selectedAnswer.answer) 
     if (selectedAnswer.answer === answer.answer && answer.isCorrect === true) {
       props.gotCorrect(true); // call the callback function in Quiz with the gotCorrect value
       

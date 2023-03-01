@@ -11,11 +11,15 @@ function App() {
     function startQuiz() {
       setStart(true)
     }
+
+    function playAgain() {
+      setStart(false)
+    }
   
   
   return (
     <main>
-      { start ? <Quiz /> : <Intro start={startQuiz} /> }
+      { start ? <Quiz playAgain={playAgain} /> : <Intro start={startQuiz} /> }
     </main>
   )
 }
