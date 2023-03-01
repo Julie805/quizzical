@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import he from 'he' //"html entities" for decoding text
 import uuid from "react-uuid"
 
 //each Card represents just a single question and its answers, not the whole quiz
-export default function Card(props) {
-  // console.log(props.showAnswers)
-  const [selectedAnswer, setSelectedAnswer] = React.useState([]);
-  const [allAnswers, setAllAnswers] = React.useState([
-    ...props.incorrectAnswers.map(answer => ({
+export default function Card({ key, question, incorrectAnswers, correctAnswer, showAnswers, gotCorrect }) {
+  
+  const [selectedAnswer, setSelectedAnswer] = useState([]);
+  const [allAnswers, setAllAnswers] = useState([
+    ...incorrectAnswers.map(answer => ({
       answer: he.decode(answer),
       isCorrect: false,
       id: uuid(),
     })),
     {
-      answer: he.decode(props.correctAnswer),
+      answer: he.decode(correctAnswer),
       isCorrect: true,
       id: uuid(),
       answeredCorrectly: false
     },
   ].sort(() => Math.random() - 0.5)) // this allows the sort to run just once. But then setAllAnswers is never used. Okay?
 
-  React.useEffect(() => {
+  useEffect(() => {
     markCorrect(selectedAnswer);
   }, [selectedAnswer]);
  
@@ -41,8 +41,7 @@ export default function Card(props) {
 //this is starting to log out now. where you left off. Check console log.
   function markCorrect (answer) {
     if (selectedAnswer.answer === answer.answer && answer.isCorrect === true) {
-      props.gotCorrect(true); // call the callback function in Quiz with the gotCorrect value
-      
+      gotCorrect(true); // call the callback function in Quiz with the gotCorrect value  
     }
   }
 
@@ -61,7 +60,7 @@ export default function Card(props) {
             ? "clicked"
             : ""
           }
-          ${gradeQuiz(answer, props.showAnswers)}`
+          ${gradeQuiz(answer, showAnswers)}`
         }
         onClick={() => handleAnswerClick(index) }
       >
@@ -72,7 +71,7 @@ export default function Card(props) {
   
   return (
     <div>
-       <h3 className="question">{he.decode(props.question)} </h3>
+       <h3 className="question">{he.decode(question)} </h3>
       <div>
         <ul className="answer-container">
           {renderAnswers()}

@@ -1,18 +1,14 @@
 import React from "react"
-// import data from "./data"
 import Card from "./components/Card"
 import uuid from "react-uuid"
-
-
 
 export default function Quiz ({ playAgain }) {
 //Holds the quiz object array  
  const [quizData, setQuizData] = React.useState([]) 
  const [showAnswers, setShowAnswers] = React.useState(false)
  const [score, setScore] = React.useState(0)
-//Gets the API data upon opening app and pushes it to quizData state. 
+
   React.useEffect(() => {
-    //fetch("https://opentdb.com/api.php?amount=5")
     fetch("https://opentdb.com/api.php?amount=5&category=17&difficulty=easy&type=multiple")
       .then((res) => res.json())
       .then((data) =>
@@ -59,14 +55,15 @@ export default function Quiz ({ playAgain }) {
   /* Maps over the data in state and passes question to Card as a prop */
   return (
     <div className="quiz-container">
-      <h4>QUIZ TIME! 5 questions (scroll for more):</h4>
+      <h2 className="quiz-heading">QUIZ TIME! </h2>
+      <h5 className="quiz-subhead">5 questions total (scroll for more).</h5>
       {createCards}
       <div className="button-container">
         <h4>{showAnswers ? `You scored ${score} out of ${quizData.length}` : ""}</h4>
         <button 
           className="quiz-button" 
           onClick={()=>handleButtonClick()}>
-            {showAnswers===false ? "Check answers" : "Play Again"}
+            {showAnswers===false ? "Check answers" : "Play again"}
         </button>
       </div>  
     </div>

@@ -4,22 +4,24 @@ import  Quiz from "./Quiz"
 import './style.css'
 
 function App() {
+  const [start, setStart] = React.useState(false)
 
-    /* 2 states: start(to start quiz), quizData (to set up Question objects)  */
-    const [start, setStart] = React.useState(false)
+  function startQuiz() {
+    setStart(true)
+  }
 
-    function startQuiz() {
-      setStart(true)
-    }
-
-    function playAgain() {
-      setStart(false)
-    }
-  
+  function playAgain() {
+    setStart(false)
+  }
   
   return (
     <main>
-      { start ? <Quiz playAgain={playAgain} /> : <Intro start={startQuiz} /> }
+      <div className="blog">
+      { start ? 
+        <Quiz playAgain={playAgain} /> : 
+        <Intro start={startQuiz} /> 
+      }
+      </div>
     </main>
   )
 }
